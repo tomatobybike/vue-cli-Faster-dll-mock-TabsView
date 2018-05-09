@@ -31,6 +31,8 @@ app.use(root+'/table',require('./routes/table'));
 
 app.use(root+'/hotnews',require('./routes/hotnews'));
 
+//34行 增加一个接口模块 球队列表接口
+app.use(root+'/kickerteam',require('./routes/kickerteam'));
 
 //文件上传
 app.use('/upload', require('./routes/data/server'));

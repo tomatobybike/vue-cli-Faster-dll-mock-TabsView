@@ -45,6 +45,12 @@ export const constantRouterMap = [
     meta: {title: 'Example', icon: 'rule'},
     children: [
       {
+        path: 'kickerteam',
+        name: 'Kickerteam',
+        component: resolve => require(['@/views/kickerteam/index'], resolve),
+        meta: {title: '球队', icon: 'kickerteam'}
+      },
+      {
         path: 'hotspots',
         name: 'Hotspots',
         component: resolve => require(['@/views/rule/hotSpots/index'], resolve),
