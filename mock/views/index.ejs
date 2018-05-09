@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title%></title>
+  <!-- index.view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimal-ui" />
+  <style type="text/css">
+    @charset"UTF-8";
+    body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+      margin:0;
+      padding:0;
+    }
+    body, button, input, select, textarea {
+      font:14px/1.5 \5FAE\8F6F\96C5\9ED1, tahoma, simsun, \5b8b\4f53,"Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB"
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-size:100%
+    }
+    div, h1, h2, h3, h4, p, form, label, input, textarea, img, span, dl, ul, li {
+      border: 0 none;
+      list-style: outside none none;
+      margin: 0;
+      padding: 0;
+    }
+    ul, ol {
+      list-style:none
+    }
+    iframe, img {
+      border:0;
+      vertical-align:top
+    }
+    table {
+      border-collapse:collapse;
+      border-spacing:0;
+      width: 100%;
+    }
+    th{
+      text-align: left;
+    }
+    .table td,.table th{
+      padding: 5px 0;
+    }
+    body .hide {
+      display: none;
+    }
+    .showing {
+      display: block!important
+    }
+    i, b, s, em {
+      font-style:normal
+    }
+    a {
+      color: gray;
+      cursor: pointer;
+      text-decoration:none;
+    }
+    a:focus,a:hover {
+      color: #2ebcfc
+    }
+    b, h1, h2, h3, h4, h5, h6 {
+      font-size: 100%;
+      font-weight: 400;
+    }
+    input{
+      outline: none;
+    }
+    label{
+      display: inline-block;
+    }
+    .ellipsis{overflow:hidden;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;word-wrap:normal}
+    *, *::after, *::before {
+      box-sizing: border-box;
+    }
+    .clearfix:after, .f-cb:after {
+      clear: both;
+      content: " ";
+      display: block;
+      font-size: 0;
+      height: 0;
+      visibility: hidden;
+    }
+    .clearfix, .f-cb {
+      zoom:1
+    }
+    .clearFix::after {
+      clear: both;
+      content: ".";
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+    .f-fl, .fl {
+      float: left;
+    }
+    .f-dn {
+      display:none
+    }
+    .f-fr {
+      float:right
+    }
+    .red,.cred{
+      color: #d71111;
+    }
+    .orange{
+      color: #ffb613;
+    }
+    .normarl-txt{
+      color: #03a9f4;
+    }
+    .danger-txt{
+      color:#ff501a;
+    }
+    .header{
+      background:#188ae2;
+      height: 50px;
+      margin-bottom: 15px;
+    }
+    .nav-handler {
+      float: left;
+      height: 50px;
+      text-align: center;
+    }
+    .nav-handler > a {
+      color: #fff;
+      display: inline-block;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 13px 20px;
+      text-align: center;
+    }
+    .pull-right{
+      border-left: 1px solid #fff;
+      border-left: 1px solid rgba(255, 255, 255, 0.8);
+      float: right;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 14px 20px;
+      color: #FFB613;
+    }
+    .pull-right a{
+      color: #fff;
+      padding: 0 10px;
+    }
+    body{
+      background: #eee;
+    }
+    .h4, h4 {
+      font-size: 18px;
+    }
+    .h5, h5 {
+      font-size: 16px;
+    }
+    .container {
+      width:1200px;
+      margin:0 auto;
+      *zoom:1
+    }
+    .container:after {
+      content:'\20';
+      display:block;
+      height:0;
+      clear:both
+    }
+    .card {
+      background: #fff;
+      margin-bottom: 20px;
+      border-radius: 2px;
+      box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.047);
+    }
+    .card .card-header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      font-size: 20px;
+      line-height: 30px;
+      padding: 20px 15px;
+    }
+    .card-title{
+      color: #383838;
+    }
+    .card-title label{
+      font-size: 14px;
+      margin: 0 16px;
+    }
+    .btn-lg, .card .card-header {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .card .card-content {
+      padding: 20px;
+    }
+    .card .card-opts {
+      padding: 20px;
+    }
+    .card > .with-border {
+      box-shadow: 0 1px 0 rgba(0,0,0,.1)
+    }
+    .btn, .width-limit, input {
+      max-width: 300px;
+    }
+    .form-group:after {
+      content:'\20';
+      display:block;
+      height:0;
+      clear:both
+    }
+
+    .form-group{
+      margin-bottom: 20px;
+    }
+    /*
+    .inner{
+      padding: 0 0 15px 0;
+    }*/
+    .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
+      float: left;
+      box-sizing: border-box;
+    }
+    .col-sm-2{
+      width: 18%;
+    }
+    .col-sm-10{
+      width: 82%;
+    }
+    .col-sm-12{
+      width: 100%;
+    }
+    .info-group .col-sm-2 {
+      width: 20%;
+    }
+    .info-group .col-sm-10 {
+      width: 80%;
+    }
+    .info-group .col-sm-offset-2 {
+      margin-left: 20%;
+    }
+    .output {
+      color: #a6a6a6;
+      padding-top: 9px;
+    }
+    .form-control {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+      width: 100%;
+      padding: 8px 12px;
+    }
+    .form-control:focus{
+      border-color: #a6a6a6;
+    }
+    .form-control::-moz-placeholder {
+      color: #d9d9d9;
+      opacity: 1;
+    }
+    .validate-error {
+      border-color: #d0021b !important;
+    }
+    input.form-control:focus {
+      background: rgba(255, 255, 255, 0.1) none repeat scroll 0 0;
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+    [class*="col-"] {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .form-horizontal .control-label {
+      margin-bottom: 0;
+      padding-top: 9px;
+    }
+
+
+
+    .col-md-4 {
+      width: 32.6531%;
+    }
+    .sidebar-nav li:not(:last-child) {
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    }
+    .sidebar-nav li.is-current a {
+      color: #188AE2;
+    }
+    .sidebar-nav li a {
+      transition: all 218ms ease 0s;
+    }
+    .sidebar-nav li a {
+      color: grey;
+      display: block;
+      font-size: 18px;
+      padding: 15px 20px;
+      transition: color 218ms ease 0s, border-width 0.305s ease 0s, padding 0.305s ease 0s;
+    }
+    .sidebar-nav li .nav-icon, .sidebar-nav li br {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="site-main">
+  <div class="container">
+    <div class="col-sm-12 main-sidebar" style="margin-top:10px; ">
+      <div class="card sidebar-nav">
+        <ul id="nav" class="nav">
+
+          <li>
+            <a href="/cms">
+              <span class="nav-title"><%= title%></span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+</body>
+</html>
