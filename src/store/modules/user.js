@@ -30,8 +30,10 @@ const user = {
       const account = userInfo.account.trim()
       return new Promise((resolve, reject) => {
         login(account, userInfo.password).then(response => {
-          setToken(account)
+          const data = response.data
+          console.log(data)
           commit('SET_TOKEN', account)
+          setToken(account)
           resolve()
         }).catch(error => {
           reject(error)
@@ -40,11 +42,16 @@ const user = {
     },
 
     // 获取用户信息
-    GetInfo ({ commit, state }) {
+    GetUserInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
           const data = response.data
-          commit('SET_ROLES', data.roles)
+          console.log('getInfo', data)
+          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+            commit('SET_ROLES', data.roles)
+          } else {
+            console.error('getInfo: roles must be a non-null array !')
+          }
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           resolve(response)

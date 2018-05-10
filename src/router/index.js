@@ -24,59 +24,84 @@ Vue.use(Router)
 export const constantRouterMap = [
   {path: '/login', component: () => import('@/views/login/index'), hidden: true},
   {path: '/404', component: () => import('@/views/404'), hidden: true},
-
+  {path: '/401', component: () => import('@/views/401'), hidden: true},
   {
-    path: '/',
+    path: '',
     component: Layout,
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
     children: [{
       path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
+      component: () => import('@/views/dashboard/index'),
+      meta: {title: 'dashboard', icon: 'form'}
     }]
-  },
+  }
 
+]
+
+export default new Router({
+  // mode: 'history', //后端支持可开
+  scrollBehavior: () => ({y: 0}),
+  routes: constantRouterMap
+})
+
+export const asyncRouterMap = [
   {
-    path: '/regulation',
+    path: '',
     component: Layout,
-    redirect: '/regulation/table',
+    redirect: '/hello',
+    name: 'hello',
+    meta: {title: 'hello', icon: 'rule', roles: ['admin', 'editor']},
+    children: [
+      {
+        path: 'hello',
+        name: 'Kickerteam',
+        component: resolve => require(['@/views/kickerteam/index'], resolve),
+        meta: {title: '瓦伦西亚', icon: 'kickerteam', roles: ['admin', 'editor']}
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: '/table',
+    alwaysShow: true, // will always show the root menu
     name: 'regulation',
-    meta: {title: 'Example', icon: 'rule'},
+    meta: {title: 'Example1', icon: 'rule'},
     children: [
       {
         path: 'kickerteam',
         name: 'Kickerteam',
         component: resolve => require(['@/views/kickerteam/index'], resolve),
-        meta: {title: '球队', icon: 'kickerteam'}
+        meta: {title: '球队1', icon: 'kickerteam', roles: ['admin', 'editor']}
       },
       {
         path: 'hotspots',
         name: 'Hotspots',
         component: resolve => require(['@/views/rule/hotSpots/index'], resolve),
-        meta: {title: 'tables', icon: 'hotspots'}
+        meta: {title: '球员1', icon: 'hotspots'}
       },
       {
         path: 'table',
         name: 'Table',
         component: resolve => require(['@/views/table/index'], resolve),
-        meta: {title: 'table', icon: 'table'}
+        meta: {title: '表格1', icon: 'table'}
       },
       {
         path: 'table2',
         name: 'Table2',
         component: resolve => require(['@/views/table/table2'], resolve),
-        meta: {title: 'table2', icon: 'table'}
+        meta: {title: '表格21', icon: 'table'}
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: {title: 'Tree', icon: 'tree'}
+        meta: {title: '树1', icon: 'tree'}
       }
     ]
   },
-
   {
     path: '/other',
     component: Layout,
@@ -88,13 +113,11 @@ export const constantRouterMap = [
         meta: {title: 'Form', icon: 'form'}
       }
     ]
-  },
-
-  {path: '*', redirect: '/404', hidden: true}
+  }
 ]
 
-export default new Router({
-  // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({y: 0}),
-  routes: constantRouterMap
-})
+export const notExitMap = [
+  { path: '*', redirect: '/404', hidden: true }
+]
+
+console.warn('asyncRouterMap', asyncRouterMap)
