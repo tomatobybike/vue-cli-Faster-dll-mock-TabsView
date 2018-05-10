@@ -63,6 +63,11 @@ router.all('/info', function(req, res, next) {
       ]
     }
   ]
+  if(req.query.token == 'admin'){
+    data.data.roles=['admin']
+  }else{
+    data.data.roles=['editor']
+  }
   //data={"result":false,"error":"imei\/m1\/emmc\/cpu\/product \u5fc5\u586b\u9009\u4e00\u4e2a"}
   $util.delayed(function(){
     res.json(data);
