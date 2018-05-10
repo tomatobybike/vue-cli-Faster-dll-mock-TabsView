@@ -50,7 +50,6 @@ export const asyncRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: '/hello',
     name: 'hello',
     meta: {title: 'hello', icon: 'rule', roles: ['admin', 'editor']},
     children: [
@@ -63,12 +62,11 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '',
+    path: '/kicker',
     component: Layout,
-    redirect: '/table',
     alwaysShow: true, // will always show the root menu
     name: 'regulation',
-    meta: {title: 'Example1', icon: 'rule'},
+    meta: {title: '踢球者', icon: 'rule'},
     children: [
       {
         path: 'kickerteam',
@@ -99,6 +97,33 @@ export const asyncRouterMap = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: {title: '树1', icon: 'tree'}
+      }
+    ]
+  },
+  {
+    path: '/sys',
+    component: Layout,
+    alwaysShow: true, // will always show the root menu
+    name: 'sys',
+    meta: {title: '系统管理', icon: 'rule'},
+    children: [
+      {
+        path: 'user',
+        name: 'User',
+        component: resolve => require(['@/views/sys/user/index'], resolve),
+        meta: {title: '用户', icon: 'kickerteam'}
+      },
+      {
+        path: 'hotspots',
+        name: 'Hotspots',
+        component: resolve => require(['@/views/rule/hotSpots/index'], resolve),
+        meta: {title: '用户组', icon: 'hotspots'}
+      },
+      {
+        path: 'menu',
+        name: 'Menu',
+        component: resolve => require(['@/views/sys/menu/index'], resolve),
+        meta: {title: '系统菜单', icon: 'hotspots'}
       }
     ]
   },
