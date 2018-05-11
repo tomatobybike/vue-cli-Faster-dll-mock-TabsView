@@ -13,7 +13,7 @@ router.all('/list', function(req, res, next) {
         "userName": "露西",
         "userEmail": "lucy@126.com",
         "userPhone": "15611111111",
-        "isAdmin":true,
+        "isAdmin":1,
         "groupId": "1",
         "groupName": "开发组",
 
@@ -22,9 +22,25 @@ router.all('/list', function(req, res, next) {
         "userName": "杰克",
         "userEmail": "jacky@126.com",
         "userPhone": "15611111111",
-        "isAdmin":false,
+        "isAdmin":0,
         "groupId": "2",
         "groupName": "商务组"
+      }, {
+        "id": "3",
+        "userName": "孙悟空",
+        "userEmail": "wukong@126.com",
+        "userPhone": "15611111113",
+        "isAdmin":0,
+        "groupId": 0,
+        "groupName": ""
+      }, {
+        "id": "4",
+        "userName": "哪吒",
+        "userEmail": "nezha@126.com",
+        "userPhone": "15611111114",
+        "isAdmin":0,
+        "groupId": 0,
+        "groupName": ""
       }]
     }
   }

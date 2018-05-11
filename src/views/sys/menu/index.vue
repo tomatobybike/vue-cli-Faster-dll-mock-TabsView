@@ -22,12 +22,13 @@
                         <el-button slot="reference" type="text" size="mini" @click="() => append(data)">添加子节点
                         </el-button>
                     </el-popover>
-                  <el-button
-                      type="text"
-                      size="mini"
-                      @click="() => remove(node, data)">
-                    删除
-                  </el-button>
+
+                    <el-button
+                        type="text"
+                        size="mini"
+                        @click="() => remove(node, data)">
+                      删除
+                    </el-button>
                 </span>
               </span>
     </el-tree>

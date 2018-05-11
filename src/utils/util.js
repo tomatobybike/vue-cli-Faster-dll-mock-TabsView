@@ -12,6 +12,10 @@ const core = {
   elPager: {
     layout: elPagerLayout(),
     pageSizes: [20, 50, 100]
+  },
+  clone (origin) {
+    let originProto = Object.getPrototypeOf(origin)
+    return Object.assign(Object.create(originProto), origin)
   }
 }
 

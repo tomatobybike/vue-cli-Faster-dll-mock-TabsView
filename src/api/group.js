@@ -31,3 +31,11 @@ export function deleteItemGroup (query) {
     params: query
   })
 }
+
+export function updatePowerGroup (query) {
+  return request({
+    url: '/group/updatePower',
+    method: 'get',
+    params: query
+  })
+}

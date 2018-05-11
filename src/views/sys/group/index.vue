@@ -65,13 +65,14 @@
     </el-dialog>
 
 
-
+    <power-dialog ref="powerDialog"></power-dialog>
   </div>
 </template>
 
 <script>
   import core from '@/utils/util'
   import {getListGroup, createItemGroup, updateItemGroup, deleteItemGroup} from '@/api/group'
+  import powerDialog from './powerDialog.vue'
   export default {
     data () {
       return {
@@ -92,6 +93,9 @@
         }
       }
     },
+    components: {
+      powerDialog
+    },
     created () {
       console.log(core.isMobile)
       console.log(core.elPager.layout)
@@ -108,9 +112,8 @@
           console.log(error)
         })
       },
-      isAdminTransform (row, column, cellValue) {
-        console.log('cellValue', cellValue)
-        return cellValue ? '是' : '否'
+      handlePower (index, row) {
+        this.$refs.powerDialog.init(row)
       },
       handleUpdate (index, row) {
         this.formData = Object.assign({}, row) // copy obj

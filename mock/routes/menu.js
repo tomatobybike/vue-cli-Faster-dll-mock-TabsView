@@ -12,6 +12,7 @@ router.all('/list', function(req, res, next) {
       "icon": "rule"
     },
     "children": [{
+      "id":99,
       "path": "hello",
       "name": "Kickerteam",
       "meta": {
