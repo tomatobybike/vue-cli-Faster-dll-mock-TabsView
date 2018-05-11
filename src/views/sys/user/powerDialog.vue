@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import {getList} from '@/api/menu'
+  import {getListNode} from '@/api/menu'
   import {updatePowerUser} from '@/api/user'
   var lastMenus = []
   export default {
@@ -104,7 +104,7 @@
       getList () {
         const loading = this.$loading(this.Global.loadingOption)
 //        var that = this
-        getList().then(response => {
+        getListNode().then(response => {
           loading.close()
           this.data = response.data
           this.data = this.parseData(this.data)

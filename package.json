@@ -11,6 +11,7 @@
     "mock": "gulp mock",
     "dev-server": "node build/dev-server.js",
     "dev": "npm-run-all --parallel mock dev-server ",
+    "devjava": "node build/dev-java-server.js",
     "build": "node build/build.js",
     "build:dll": "webpack --config build/webpack.dll.conf.js"
   },
