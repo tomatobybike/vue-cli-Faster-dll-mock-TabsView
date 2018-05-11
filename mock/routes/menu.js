@@ -73,4 +73,52 @@ router.all('/list', function(req, res, next) {
 });
 
 
+router.all('/delete', function(req, res, next) {
+  var data={
+    "code":0,
+    "data":[],
+    "msg":'ok'
+  }
+  // data.code = 999
+  $util.delayed(function(){
+    res.json(data);
+  },500);
+});
+
+router.all('/updateNode', function(req, res, next) {
+  var data={
+    "code":0,
+    "data":[],
+    "msg":'ok'
+  }
+  // data.code = 999
+  $util.delayed(function(){
+    res.json(data);
+  },500);
+});
+
+router.all('/createChild', function(req, res, next) {
+  var data={
+    "code":0,
+    "data":[],
+    "msg":'ok'
+  }
+  // data.code = 999
+  $util.delayed(function(){
+    res.json(data);
+  },500);
+});
+
+router.all('/createSiblings', function(req, res, next) {
+  var data={
+    "code":0,
+    "data":[],
+    "msg":'ok'
+  }
+  // data.code = 999
+  $util.delayed(function(){
+    res.json(data);
+  },500);
+});
+
 module.exports = router;
