@@ -140,7 +140,7 @@
 
 <script>
   import core from '@/utils/util'
-  import { getList, createItem, updateItem, deleteItem } from '@/api/personnel'
+  import { getList, createItem, updateItem, deleteItem } from '@/api/user'
   import { getListGroup } from '@/api/group'
   export default {
     data () {

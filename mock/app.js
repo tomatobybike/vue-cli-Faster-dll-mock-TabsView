@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use('/',express.static(path.join(__dirname, $static)));
 
 var root=''
-app.use(root+'/user',require('./routes/user'));
+app.use(root+'/member',require('./routes/member'));
 app.use(root+'/api/data',require('./routes/data'));
 
 app.use(root+'/table',require('./routes/table'));
@@ -34,7 +34,7 @@ app.use(root+'/hotnews',require('./routes/hotnews'));
 //34行 增加一个接口模块 球队列表接口
 app.use(root+'/kickerteam',require('./routes/kickerteam'));
 app.use(root+'/menu',require('./routes/menu'));
-app.use(root+'/personnel',require('./routes/personnel'));
+app.use(root+'/user',require('./routes/user'));
 app.use(root+'/group',require('./routes/group'));
 
 //文件上传

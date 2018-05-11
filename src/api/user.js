@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getList (query) {
   return request({
-    url: '/personnel/list',
+    url: '/user/list',
     method: 'get',
     params: query
   })
@@ -10,7 +10,7 @@ export function getList (query) {
 
 export function createItem (data) {
   return request({
-    url: '/personnel/create',
+    url: '/user/create',
     method: 'post',
     data
   })
@@ -18,7 +18,7 @@ export function createItem (data) {
 
 export function updateItem (data) {
   return request({
-    url: '/personnel/update',
+    url: '/user/update',
     method: 'post',
     data
   })
@@ -26,7 +26,7 @@ export function updateItem (data) {
 
 export function deleteItem (query) {
   return request({
-    url: '/personnel/delete',
+    url: '/user/delete',
     method: 'get',
     params: query
   })
