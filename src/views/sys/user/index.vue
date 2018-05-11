@@ -138,13 +138,15 @@
                      :total="paginator.totalNum">
       </el-pagination>
     </div>
+    <power-dialog ref="powerDialog"></power-dialog>
   </div>
 </template>
 
 <script>
   import core from '@/utils/util'
-  import { getList, createItem, updateItem, deleteItem } from '@/api/user'
+  import { getListUser, createItemUser, updateItemUser, deleteItemUser } from '@/api/user'
   import { getListGroup } from '@/api/group'
+  import powerDialog from './powerDialog.vue'
   export default {
     data () {
       return {
@@ -178,6 +180,9 @@
         }
       }
     },
+    components: {
+      powerDialog
+    },
     created () {
       console.log(core.isMobile)
       console.log(core.elPager.layout)
@@ -190,7 +195,7 @@
           displayNum: this.paginator.displayNum
         }
         const loading = this.$loading(this.Global.loadingOption)
-        getList(params).then(response => {
+        getListUser(params).then(response => {
           loading.close()
           this.list = response.data.list
           Object.assign(this.paginator, {
@@ -200,6 +205,9 @@
           loading.close()
           console.log(error)
         })
+      },
+      handlePower (index, row) {
+        this.$refs.powerDialog.init(row)
       },
       isAdminTransform (row, column, cellValue) {
         console.log('cellValue', cellValue)
@@ -236,7 +244,7 @@
             id: row.id
           }
           let loading = this.$loading(this.Global.loadingOption)
-          deleteItem(param).then(() => {
+          deleteItemUser(param).then(() => {
             loading.close()
             this.getList()
             this.dialogFormVisible = false
@@ -279,7 +287,7 @@
               userPhone: this.formData.userPhone
             }
             let loading = this.$loading(this.Global.loadingOption)
-            createItem(param).then(() => {
+            createItemUser(param).then(() => {
               loading.close()
               this.getList()
               this.dialogFormVisible = false
@@ -306,7 +314,7 @@
               userPhone: this.formData.userPhone
             }
             let loading = this.$loading(this.Global.loadingOption)
-            updateItem(param).then(() => {
+            updateItemUser(param).then(() => {
               loading.close()
               this.getList()
               this.dialogFormVisible = false

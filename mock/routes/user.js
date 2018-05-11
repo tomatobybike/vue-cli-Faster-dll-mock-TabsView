@@ -32,7 +32,8 @@ router.all('/list', function(req, res, next) {
         "userPhone": "15611111113",
         "isAdmin":0,
         "groupId": 0,
-        "groupName": ""
+        "groupName": "",
+        "menus": [2, 3, 4, 5, 6, 7]
       }, {
         "id": "4",
         "userName": "哪吒",
@@ -40,7 +41,8 @@ router.all('/list', function(req, res, next) {
         "userPhone": "15611111114",
         "isAdmin":0,
         "groupId": 0,
-        "groupName": ""
+        "groupName": "",
+        "menus": [4]
       }]
     }
   }
@@ -86,4 +88,15 @@ router.all('/delete', function(req, res, next) {
   },500);
 });
 
+router.all('/updatePower', function(req, res, next) {
+  var data={
+    "code":0,
+    "data":[],
+    "msg":'ok'
+  }
+  // data.code = 999
+  $util.delayed(function(){
+    res.json(data);
+  },500);
+});
 module.exports = router;

@@ -83,6 +83,9 @@
         return data
       },
       getFilterHasChild (data, myMenus) {
+        if (!myMenus) {
+          return []
+        }
         lastMenus = myMenus
         const dataNoDead = data.filter(item => {
           if (item.children && item.children.length) {
@@ -133,6 +136,7 @@
           allCheckKeys = ''
         }
         const param = {
+          id: this.group.id,
           menuIds: allCheckKeys
         }
         let loading = this.$loading(this.Global.loadingOption)

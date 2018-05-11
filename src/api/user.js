@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getList (query) {
+export function getListUser (query) {
   return request({
     url: '/user/list',
     method: 'get',
@@ -8,7 +8,7 @@ export function getList (query) {
   })
 }
 
-export function createItem (data) {
+export function createItemUser (data) {
   return request({
     url: '/user/create',
     method: 'post',
@@ -16,7 +16,7 @@ export function createItem (data) {
   })
 }
 
-export function updateItem (data) {
+export function updateItemUser (data) {
   return request({
     url: '/user/update',
     method: 'post',
@@ -24,9 +24,17 @@ export function updateItem (data) {
   })
 }
 
-export function deleteItem (query) {
+export function deleteItemUser (query) {
   return request({
     url: '/user/delete',
+    method: 'get',
+    params: query
+  })
+}
+
+export function updatePowerUser (query) {
+  return request({
+    url: '/user/updatePower',
     method: 'get',
     params: query
   })
