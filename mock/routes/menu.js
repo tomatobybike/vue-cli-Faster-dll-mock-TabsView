@@ -8,8 +8,7 @@ router.all('/list', function(req, res, next) {
     "path": "",
     "name": "hello",
     "meta": {
-      "title": "西班牙超级联赛",
-      "icon": "rule"
+      "title": "西班牙超级联赛"
     },
     "children": [{
       "id":99,

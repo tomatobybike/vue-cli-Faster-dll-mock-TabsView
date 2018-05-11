@@ -262,11 +262,19 @@
         })
       },
       handleCreate () {
-        this.resetTemp()
-        this.dialogStatus = 'create'
-        this.dialogFormVisible = true
-        this.$nextTick(() => {
-          this.$refs['dataForm'].clearValidate()
+        const loading = this.$loading(this.Global.loadingOption)
+        getListGroup().then(response => {
+          loading.close()
+          this.resetTemp()
+          this.group = response.data.list
+          this.dialogStatus = 'create'
+          this.dialogFormVisible = true
+          this.$nextTick(() => {
+            this.$refs['dataForm'].clearValidate()
+          })
+        }).catch(error => {
+          loading.close()
+          console.log(error)
         })
       },
       resetTemp () {
@@ -282,9 +290,11 @@
           console.log('valid', valid)
           if (valid) {
             let param = {
+              isAdmin: this.formData.isAdmin,
               userName: this.formData.userName,
               userEmail: this.formData.userEmail,
-              userPhone: this.formData.userPhone
+              userPhone: this.formData.userPhone,
+              groupId: this.formData.group
             }
             let loading = this.$loading(this.Global.loadingOption)
             createItemUser(param).then(() => {
@@ -309,9 +319,11 @@
           if (valid) {
             let param = {
               id: this.formData.id,
+              isAdmin: this.formData.isAdmin,
               userName: this.formData.userName,
               userEmail: this.formData.userEmail,
-              userPhone: this.formData.userPhone
+              userPhone: this.formData.userPhone,
+              groupId: this.formData.group
             }
             let loading = this.$loading(this.Global.loadingOption)
             updateItemUser(param).then(() => {

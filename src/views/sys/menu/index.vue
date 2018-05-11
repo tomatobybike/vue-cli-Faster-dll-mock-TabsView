@@ -1,5 +1,9 @@
 <template>
   <div class="app-container">
+  <div class="filter-container">
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" size="small" @click="handleCreateRoot">添加一级菜单
+      </el-button>
+  </div>
     <el-tree
             :data="data"
             default-expand-all
@@ -64,9 +68,10 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button v-if="dialogStatus=='updateNode'" type="primary" @click="updateNode">确定</el-button>
-        <el-button v-else="dialogStatus=='createChild'" type="primary" @click="createChild">确定</el-button>
-        <el-button v-else="dialogStatus=='createSiblings'" type="primary" @click="createSiblings">确定</el-button>
+        <el-button v-if="dialogStatus === 'updateNode'" type="primary" @click="updateNode">确定</el-button>
+        <el-button v-else-if="dialogStatus === 'createChild'" type="primary" @click="createChild">确定</el-button>
+        <el-button v-else-if="dialogStatus === 'handleCreateRoot'" type="primary" @click="createChild">xx确定</el-button>
+        <el-button v-else="dialogStatus === 'createSiblings'" type="primary" @click="createSiblings">确定</el-button>
         <el-button @click="dialogFormVisible = false">取消</el-button>
       </div>
     </el-dialog>
@@ -89,7 +94,8 @@
         textMap: {
           updateNode: '修改',
           createChild: '新建子节点',
-          createSiblings: '新建兄弟节点'
+          createSiblings: '新建兄弟节点',
+          createRoot: '新建一级菜单'
         },
         isNodeButton: false,
         defaultProps: {
@@ -187,6 +193,17 @@
               console.log(error)
             })
           }
+        })
+      },
+      handleCreateRoot (data) {
+        this.isNodeButton = true
+        this.resetTemp()
+        console.log('ddddddddddddd', data)
+        this.formData.parentId = 0
+        this.dialogStatus = 'handleCreateRoot'
+        this.dialogFormVisible = true
+        this.$nextTick(() => {
+          this.$refs['dataForm'].clearValidate()
         })
       },
       handleCreateChild (data) {
