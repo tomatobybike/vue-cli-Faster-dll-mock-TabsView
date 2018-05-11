@@ -114,10 +114,10 @@ export const asyncRouterMap = [
         meta: {title: '用户', icon: 'kickerteam'}
       },
       {
-        path: 'hotspots',
-        name: 'Hotspots',
-        component: resolve => require(['@/views/rule/hotSpots/index'], resolve),
-        meta: {title: '用户组', icon: 'hotspots'}
+        path: 'group',
+        name: 'group',
+        component: resolve => require(['@/views/sys/group/index'], resolve),
+        meta: {title: '用户组', icon: 'kickerteam'}
       },
       {
         path: 'menu',
