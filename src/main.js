@@ -14,6 +14,7 @@ import router from './router'
 import store from './store'
 
 import '@/icons' // icon
+import '@/utils/errorLog'// error log
 import global_ from '@/utils/Global' // 引用模块进来
 import '@/utils/permission' // permission control
 

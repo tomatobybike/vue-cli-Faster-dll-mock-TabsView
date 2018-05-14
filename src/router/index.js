@@ -65,6 +65,7 @@ export const asyncRouterMap = [
     path: '/kicker',
     component: Layout,
     alwaysShow: true, // will always show the root menu
+    redirect: 'noredirect',
     name: 'regulation',
     meta: {title: '踢球者', icon: 'rule'},
     children: [
@@ -138,6 +139,12 @@ export const asyncRouterMap = [
         meta: {title: 'Form', icon: 'form'}
       }
     ]
+  },
+  {
+    path: '/error-log',
+    component: Layout,
+    redirect: 'noredirect',
+    children: [{path: 'log', component: resolve => require(['@/views/errorLog/index'], resolve), name: 'errorLog', meta: { title: 'errorLog', icon: 'bug' }}]
   }
 ]
 

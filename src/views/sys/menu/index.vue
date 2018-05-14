@@ -45,7 +45,7 @@
 
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" @close='closeDialog'>
-      <el-form ref="dataForm" :model="formData" label-position="left"    class="demo-form-inline" label-width="70px" >
+      <el-form ref="dataForm" :model="formData" label-position="left"    class="demo-form-inline" label-width="160px" >
         <el-form-item
                 prop="name"
                 label="name"
@@ -64,13 +64,29 @@
                 prop="path"
                 label="路由"
         >
-          <el-input v-model="formData.path" placeholder="可不填"></el-input>
+          <el-input v-model="formData.path" placeholder="如果是父级，可不填"></el-input>
         </el-form-item>
+        <el-form-item
+                prop="redirect"
+                label="父菜单跳转URL"
+        >
+          <el-input v-model="formData.redirect" placeholder="可不填"></el-input>
+        </el-form-item>
+        <div class="board-column kanban working">
+          <div class="board-column-header">
+            重要提示
+          </div>
+          <div class="board-column-content">
+            <p>
+              父菜单跳转URL,指父级菜单的面包屑导航的超链接 ，如果不需要显示在面包屑导航  可以设置为 "noredirect"
+            </p>
+          </div>
+        </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button v-if="dialogStatus === 'updateNode'" type="primary" @click="updateNode">确定</el-button>
         <el-button v-else-if="dialogStatus === 'createChild'" type="primary" @click="createChild">确定</el-button>
-        <el-button v-else-if="dialogStatus === 'handleCreateRoot'" type="primary" @click="createChild">xx确定</el-button>
+        <el-button v-else-if="dialogStatus === 'handleCreateRoot'" type="primary" @click="createChild">确定</el-button>
         <el-button v-else="dialogStatus === 'createSiblings'" type="primary" @click="createSiblings">确定</el-button>
         <el-button @click="dialogFormVisible = false">取消</el-button>
       </div>
@@ -87,7 +103,8 @@
         formData: {
           id: null,
           name: 1,
-          path: ''
+          path: '',
+          redirect: null
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -175,7 +192,8 @@
               id: this.formData.id,
               name: this.formData.name,
               title: this.formData.title,
-              path: this.formData.path
+              path: this.formData.path,
+              redirect: this.formData.redirect
             }
             let loading = this.$loading(this.Global.loadingOption)
             updateNode(param).then(() => {
@@ -209,7 +227,6 @@
       handleCreateChild (data) {
         this.isNodeButton = true
         this.resetTemp()
-        console.log('ddddddddddddd', data)
         this.formData.parentId = data.id
         this.dialogStatus = 'createChild'
         this.dialogFormVisible = true
@@ -226,7 +243,8 @@
               parentId: this.formData.parentId,
               name: this.formData.name,
               title: this.formData.title,
-              path: this.formData.path
+              path: this.formData.path,
+              redirect: this.formData.redirect
             }
             let loading = this.$loading(this.Global.loadingOption)
             createChild(param).then(() => {
@@ -266,7 +284,8 @@
               parentId: this.formData.parentId,
               name: this.formData.name,
               title: this.formData.title,
-              path: this.formData.path
+              path: this.formData.path,
+              redirect: this.formData.redirect
             }
             let loading = this.$loading(this.Global.loadingOption)
             createSiblings(param).then(() => {
@@ -316,7 +335,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
     .custom-tree-node {
         flex: 1;
         display: flex;
@@ -324,5 +343,36 @@
         justify-content: space-between;
         font-size: 14px;
         padding-right: 8px;
+    }
+
+    .board-column {
+      background: #f0f0f0;
+      border-radius: 3px;
+    }
+    .board-column .board-column-header {
+      height: 50px;
+      line-height: 50px;
+      overflow: hidden;
+      padding: 0 20px;
+      background: #f9944a;
+      color: #fff;
+      border-radius: 3px 3px 0 0;
+    }
+    .board-column .board-column-content {
+      border: 10px solid transparent;
+      min-height: 60px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: left;
+      -ms-flex-align: left;
+      align-items: left;
     }
 </style>

@@ -53,7 +53,7 @@ export default {
     i18n: '国际化'
   },
   navbar: {
-    logOut: '退出登录',
+    logOut: '退出',
     dashboard: '首页',
     github: '项目地址',
     screenfull: '全屏',
