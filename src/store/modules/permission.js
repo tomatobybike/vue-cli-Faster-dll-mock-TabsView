@@ -30,6 +30,7 @@ function filterAsyncRouter (asyncRouterMap, owerMenus) {
         if (item.meta) {
           that.meta.title = item.meta.title
         }
+        that.path = item.path
         console.log('that', that, i)
         if (that.children && that.children.length) {
           that.children = filterAsyncRouter(i.children, item.children)
