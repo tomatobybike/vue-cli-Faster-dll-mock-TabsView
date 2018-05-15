@@ -37,6 +37,10 @@
       </el-table-column>
     </el-table>
 
+    <el-dialog :visible.sync="dialogVisible">
+      <img width="100%" :src="dialogImageUrl" alt="">
+    </el-dialog>
+
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :model="formData" label-position="left"    class="demo-form-inline" label-width="70px" >
         <el-form-item
@@ -46,6 +50,22 @@
         >
           <el-input v-model="formData.name"></el-input>
         </el-form-item>
+        <el-form-item
+                label="球队图标"
+        >
+          <el-upload
+                  action="/api/upload"
+                  list-type="picture-card"
+                  :file-list="fileList"
+                  :limit="3"
+                  :on-success="handleAvatarSuccess"
+                  :on-exceed="handleExceed"
+                  :on-preview="handlePictureCardPreview"
+                  :on-remove="handleRemove">
+            <i class="el-icon-plus"></i>
+          </el-upload>
+        </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button v-if="dialogStatus=='create'" type="primary" @click="createData">确定</el-button>
@@ -97,7 +117,13 @@
         rules: {
           title: [{ required: true, message: '必填项', trigger: 'blur' }],
           name: [{ required: true, message: '必填项', trigger: 'blur' }]
-        }
+        },
+        fileList: [
+          {url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
+          {url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
+        ],
+        dialogImageUrl: '',
+        dialogVisible: false
       }
     },
     created () {
@@ -207,7 +233,8 @@
           if (valid) {
             let param = {
               id: this.formData.id,
-              name: this.formData.name
+              name: this.formData.name,
+              fileList: this.fileList
             }
             let loading = this.$loading(this.Global.loadingOption)
             updateTeam(param).then(() => {
@@ -226,6 +253,38 @@
             })
           }
         })
+      },
+      getUrlList (fileList) {
+        var newArray = []
+        for (var value of fileList) {
+          newArray.push({
+            url: value.url
+          })
+        }
+        return newArray
+      },
+      handleAvatarSuccess (res, file, fileList) {
+        let thisItem = fileList.find(function (value, index, arr) {
+          return value.uid === file.uid
+        })
+        if (thisItem !== -1) {
+          thisItem.url = res.data
+        } else {
+          this.fileList.push(res.data)
+        }
+        this.fileList = Object.assign([], this.fileList, fileList)
+        console.warn(this.fileList)
+      },
+      handleRemove (file, fileList) {
+        console.log(file, fileList)
+        this.fileList = this.getUrlList(fileList)
+      },
+      handlePictureCardPreview (file) {
+        this.dialogImageUrl = file.url
+        this.dialogVisible = true
+      },
+      handleExceed (files, fileList) {
+        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
       }
     }
   }

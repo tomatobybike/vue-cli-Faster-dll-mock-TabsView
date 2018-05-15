@@ -91,11 +91,11 @@ router.post('/', function(req, res) {
       var i={
         code:'200',
         msg: 'success',
-        data:''
+        data:'/api/art/'+avatarName
       }
     $util.delayed(function(){
         res.status(i.code).json(i);
-    },20000);
+    },200);
 
       req.body.gClassId=gClassId;
       req.body.pictureUrl=avatarName;

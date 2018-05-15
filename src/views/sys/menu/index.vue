@@ -71,6 +71,22 @@
                 label="父菜单跳转URL"
         >
           <el-input v-model="formData.redirect" placeholder="可不填"></el-input>
+          <div>可不填，指父级菜单的面包屑导航的超链接 ，如果不需要显示在面包屑导航  可以设置为 "noredirect"</div>
+        </el-form-item>
+
+        <el-form-item
+                prop="alwaysShow"
+                label="父菜单是否总是显示"
+        >
+          <el-select v-model="formData.alwaysShow" clearable  placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+          </el-select>
+          <div>可不填，默认 子菜单如果等于1个则不显示父级菜单，大于1才显示,选择是则始终始终显示父级菜单</div>
         </el-form-item>
         <div class="board-column kanban working">
           <div class="board-column-header">
@@ -78,7 +94,10 @@
           </div>
           <div class="board-column-content">
             <p>
-              父菜单跳转URL,指父级菜单的面包屑导航的超链接 ，如果不需要显示在面包屑导航  可以设置为 "noredirect"
+              <span class="font-danger">父菜单跳转URL</span>,指父级菜单的面包屑导航的超链接 ，如果不需要显示在面包屑导航  可以设置为 "noredirect",<span class="font-danger">有子菜单才需要设置</span>
+            </p>
+            <p>
+              <span class="font-danger">父菜单是否总是显示</span>,子菜单如果个数等于1个则不显示父级菜单，大于1才显示,选择是则始终始终显示父级菜单，<span class="font-danger">有子菜单才需要设置</span>
             </p>
           </div>
         </div>
@@ -99,12 +118,20 @@
     data () {
       return {
         data: [],
+        options: [{
+          value: true,
+          label: '是'
+        }, {
+          value: false,
+          label: '否'
+        }],
         itemData: null,
         formData: {
           id: null,
           name: 1,
           path: '',
-          redirect: null
+          redirect: null,
+          alwaysShow: null
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -195,6 +222,9 @@
               path: this.formData.path,
               redirect: this.formData.redirect
             }
+            if (this.formData.alwaysShow !== '') {
+              param.alwaysShow = this.formData.alwaysShow
+            }
             let loading = this.$loading(this.Global.loadingOption)
             updateNode(param).then(() => {
               loading.close()
@@ -246,6 +276,9 @@
               path: this.formData.path,
               redirect: this.formData.redirect
             }
+            if (this.formData.alwaysShow !== '') {
+              param.alwaysShow = this.formData.alwaysShow
+            }
             let loading = this.$loading(this.Global.loadingOption)
             createChild(param).then(() => {
               loading.close()
@@ -286,6 +319,9 @@
               title: this.formData.title,
               path: this.formData.path,
               redirect: this.formData.redirect
+            }
+            if (this.formData.alwaysShow !== '') {
+              param.alwaysShow = this.formData.alwaysShow
             }
             let loading = this.$loading(this.Global.loadingOption)
             createSiblings(param).then(() => {

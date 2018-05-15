@@ -6,7 +6,7 @@
 module.exports = {
     config: {
         title:'server',
-        static: 'public/dist',    //Production
+        static: '../public/dist',    //Production
         delayedTime:200  //模拟异步接口请求事件耗时慢情况
     },
     UPLOAD_FOLDER:'/art/',
