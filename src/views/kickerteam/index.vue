@@ -269,10 +269,8 @@
         })
         if (thisItem !== -1) {
           thisItem.url = res.data
-        } else {
-          this.fileList.push(res.data)
         }
-        this.fileList = Object.assign([], this.fileList, fileList)
+        this.fileList = this.getUrlList(fileList)
         console.warn(this.fileList)
       },
       handleRemove (file, fileList) {
