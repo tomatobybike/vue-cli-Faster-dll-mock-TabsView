@@ -56,7 +56,7 @@
           <el-upload
                   action="/api/upload"
                   list-type="picture-card"
-                  :file-list="fileList"
+                  :file-list="formData.fileList"
                   :limit="3"
                   :on-success="handleAvatarSuccess"
                   :on-exceed="handleExceed"
@@ -106,7 +106,8 @@
         },
         formData: {
           id: null,
-          name: ''
+          name: '',
+          fileList: []
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -118,10 +119,6 @@
           title: [{ required: true, message: '必填项', trigger: 'blur' }],
           name: [{ required: true, message: '必填项', trigger: 'blur' }]
         },
-        fileList: [
-          {url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
-          {url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
-        ],
         dialogImageUrl: '',
         dialogVisible: false
       }
@@ -200,15 +197,18 @@
       resetTemp () {
         this.formData = {
           id: null,
-          name: ''
+          name: '',
+          fileList: []
         }
       },
       createData () {
         this.$refs['dataForm'].validate((valid) => {
           console.log('valid', valid)
           if (valid) {
+            this.getUrlList()
             let param = {
-              name: this.formData.name
+              name: this.formData.name,
+              fileList: this.formData.urls
             }
             let loading = this.$loading(this.Global.loadingOption)
             createTeam(param).then(() => {
@@ -231,10 +231,11 @@
       updateData () {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
+            this.getUrlList()
             let param = {
               id: this.formData.id,
               name: this.formData.name,
-              fileList: this.fileList
+              fileList: this.formData.urls
             }
             let loading = this.$loading(this.Global.loadingOption)
             updateTeam(param).then(() => {
@@ -254,28 +255,24 @@
           }
         })
       },
-      getUrlList (fileList) {
-        var newArray = []
-        for (var value of fileList) {
+      getUrlList () {
+        let newArray = []
+        for (var value of this.fileList) {
           newArray.push({
             url: value.url
           })
         }
-        return newArray
+        this.formData.urls = newArray
       },
       handleAvatarSuccess (res, file, fileList) {
-        let thisItem = fileList.find(function (value, index, arr) {
-          return value.uid === file.uid
+        fileList.find(function (value, index, arr) {
+          if (value.uid === file.uid) {
+            value.url = res.data
+          }
         })
-        if (thisItem !== -1) {
-          thisItem.url = res.data
-        }
-        this.fileList = this.getUrlList(fileList)
-        console.warn(this.fileList)
+        this.fileList = fileList
       },
       handleRemove (file, fileList) {
-        console.log(file, fileList)
-        this.fileList = this.getUrlList(fileList)
       },
       handlePictureCardPreview (file) {
         this.dialogImageUrl = file.url

@@ -12,12 +12,26 @@ router.all('/list', function(req, res, next) {
         {
           "id":5,
           "name":"巴萨罗那",
-          "createdate":1524453842933
+          "createdate":1524453842933,
+          "fileList": [
+            {url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
+            {url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
+          ]
         },
         {
           "id":6,
           "name":"罗马",
-          "createdate":1524468649929
+          "createdate":1524468649929,
+          "fileList": [
+            {url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
+          ]
+        },
+        {
+          "id":6,
+          "name":"陕西盖天力",
+          "createdate":1524468649929,
+          "fileList": [
+          ]
         }
       ]
     }
