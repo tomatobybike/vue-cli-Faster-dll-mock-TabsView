@@ -8,7 +8,7 @@ const errorLog = {
     }
   },
   actions: {
-    addErrorLog ({ commit }, log) {
+    AddErrorLog ({ commit }, log) {
       commit('ADD_ERROR_LOG', log)
     }
   }
