@@ -31,28 +31,14 @@ import md5 from 'blueimp-md5'
 export default {
   name: 'login',
   data () {
-    const validateUsername = (rule, value, callback) => {
-      if (value.length < 0) {
-        callback(new Error('请输入正确的用户名'))
-      } else {
-        callback()
-      }
-    }
-    const validatePass = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('密码不能小于6位'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
         account: '',
         password: ''
       },
       loginRules: {
-        account: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePass }]
+        account: [{ required: true, trigger: 'blur', message: '请输入用户邮箱' }],
+        password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
       },
       loading: false,
       pwdType: 'password'
