@@ -9,3 +9,12 @@
 - [在线访问](http://panjiachen.github.io/vue-element-admin)
 
 - [使用文档](https://panjiachen.github.io/vue-element-admin-site/zh/)
+
+# yarn install
+
+# yarn run dev
+
+# yarn run mock
+
+# yarn run build
+
