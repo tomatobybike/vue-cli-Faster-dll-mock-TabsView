@@ -32,7 +32,7 @@
     "normalize.css": "^8.0.0",
     "nprogress": "0.2.0",
     "screenfull": "3.3.2",
-    "underscore": "^1.9.0",
+    "underscore": "^1.12.1",
     "vue": "^2.5.16",
     "vue-core-image-upload": "2.1.11",
     "vue-datasource": "1.0.9",
